@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import MyButton from './components/MyButton';
+import MyLi from './components/MyLi';
 
 let questions = [
     {title: "Тбилиси - столица Грузии?", 
@@ -46,11 +48,9 @@ let questions = [
 function Result({correctAnswers}) {
   return (
     <div className="result">
-      <img src="okak.png" alt="Result" />
+      <img src="/src/assets/okak.png" alt="Result" />
       <h2>Вы ответили на {correctAnswers} вопроса из {questions.length}</h2>
-      <a href='/'>
-        <button>Попробовать снова</button>
-      </a>
+      <MyButton text="попробовать снова" link="/" />
     </div>
   );
 }
@@ -61,19 +61,27 @@ function Quiz( {step, question, clickVariant}) {
 
   return (
     <>
+
       <div className="progress">
         <div style={{ width: `${percentageProgressBar}%` }} className="progress__inner"></div>
       </div>
+
       <h1>
         {question.title}
       </h1>
       <ul>
           {
             question.variants.map((text, index) => (
-              <li onClick={() => clickVariant(index)} key={text}>{text}</li>
+              <MyLi
+                key={index}
+                text={text}
+                index={index}
+                clickVariant={clickVariant}
+              />
             ))
           }
       </ul>
+
     </>
   );
 }
@@ -93,9 +101,13 @@ function App() {
   return (
     <div className="App">
       {
-        step !== questions.length ? (<Quiz step = {step} question = {question} clickVariant={clickVariant}/> 
-        ) : (
-          <Result correctAnswers= {correctAnswers}/>)
+        step !== questions.length ? 
+        (
+          <Quiz step = {step} question = {question} clickVariant={clickVariant}/> 
+        ) 
+        : (
+          <Result correctAnswers= {correctAnswers}/>
+        )
        }
     </div>
   );
