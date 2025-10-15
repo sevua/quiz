@@ -55,7 +55,7 @@ function Result({correctAnswers}) {
   );
 }
 
-function Game( {step, question, clickVariant}) {
+function Quiz( {step, question, clickVariant}) {
   const  percentageProgressBar = Math.round((step / questions.length) * 100)
 
 
@@ -93,7 +93,7 @@ function App() {
   return (
     <div className="App">
       {
-        step !== questions.length ? (<Game step = {step} question = {question} clickVariant={clickVariant}/> 
+        step !== questions.length ? (<Quiz step = {step} question = {question} clickVariant={clickVariant}/> 
         ) : (
           <Result correctAnswers= {correctAnswers}/>)
        }
